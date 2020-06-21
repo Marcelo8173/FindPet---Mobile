@@ -1,8 +1,12 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import FeatheIcon from 'react-native-vector-icons/Feather';
 
+interface ContainerFocus{
+    isFocus: boolean;
+    isErrored: boolean;
+}
 
-export const InputContainer = styled.View`
+export const InputContainer = styled.View<ContainerFocus>`
     display: flex;
     flex-direction: row;
     border: 2px solid #B9E0EB;
@@ -10,6 +14,9 @@ export const InputContainer = styled.View`
     margin-bottom: 24px;
     align-content: center;
     align-items: center;
+    ${props => props.isFocus && css`
+        border-color: #32AFC0;
+    ` }
 `;
 
 export const Icon = styled(FeatheIcon)`

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Container, Header, TitleHeader, Content, Footer, 
     FooterButtonContainer, ButtonText, LoginContentButton,  LoginContentButtonText,
     FooterImage} from './style';
@@ -6,13 +6,20 @@ import InputComponent from '../../components/input';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { ScrollView } from 'react-native'
+import { Form } from '@unform/mobile';
+import { FormHandles } from '@unform/core';
 
 const Login: React.FC = () =>{
-
+    const formRef = useRef<FormHandles>(null);
+    
     const navigation = useNavigation();
 
     const handleRegister = useCallback(() =>{
         navigation.navigate('doRegister')
+    },[]);
+
+    const handleSubmit = useCallback(() => {
+
     },[])
 
     return(
@@ -30,30 +37,32 @@ const Login: React.FC = () =>{
                 </Header>
 
                 <Content>
-                    <InputComponent
-                        icon='mail'
-                        name="email" 
-                        placeholder="E-mail"
-                    />
-                    
-                    <InputComponent
-                        icon='lock'
-                        name="password" 
-                        placeholder="Senha"
-                        secureTextEntry
-                    />
+                    <Form ref={formRef} onSubmit={handleSubmit} >
+                        <InputComponent
+                            icon='mail'
+                            name="email" 
+                            placeholder="E-mail"
+                        />
+                        
+                        <InputComponent
+                            icon='lock'
+                            name="password" 
+                            placeholder="Senha"
+                            secureTextEntry
+                        />
 
-                    <InputComponent
-                        icon='lock'
-                        name="password_confirmation" 
-                        placeholder="Confirmar senha"
-                        secureTextEntry
-                    />
+                        <InputComponent
+                            icon='lock'
+                            name="password_confirmation" 
+                            placeholder="Confirmar senha"
+                            secureTextEntry
+                        />
 
 
-                    <LoginContentButton>
-                        <LoginContentButtonText>CADASTRAR</LoginContentButtonText>
-                    </LoginContentButton>
+                        <LoginContentButton>
+                            <LoginContentButtonText>CADASTRAR</LoginContentButtonText>
+                        </LoginContentButton>
+                    </Form>
                 </Content>
 
 
