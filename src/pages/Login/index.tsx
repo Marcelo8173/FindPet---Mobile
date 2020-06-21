@@ -4,6 +4,7 @@ import { Container, Header, TitleHeader, Content, Footer,
     ButtonText, LoginContentButton,  LoginContentButtonText,
     FooterImage} from './styles';
 import InputComponent from '../../components/input';
+import { ScrollView } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 
 const Login: React.FC = () =>{
@@ -19,46 +20,53 @@ const Login: React.FC = () =>{
     },[])
 
     return(
-        <Container>
+        <>
+            <ScrollView 
+                keyboardShouldPersistTaps='handled'
+                contentContainerStyle={{flex: 1}}
+            >
+                <Container>
 
-            <Header>
-                <TitleHeader>
-                    Login
-                </TitleHeader>
-            </Header>
+                    <Header>
+                        <TitleHeader>
+                            Login
+                        </TitleHeader>
+                    </Header>
 
-            <Content>
-                <InputComponent
-                    icon='mail'
-                    name="email" 
-                    placeholder="E-mail"
-                />
-                
-                <InputComponent
-                    icon='lock'
-                    name="password" 
-                    placeholder="Senha"
-                    secureTextEntry
-                />
+                    <Content>
+                        <InputComponent
+                            icon='mail'
+                            name="email" 
+                            placeholder="E-mail"
+                        />
+                        
+                        <InputComponent
+                            icon='lock'
+                            name="password" 
+                            placeholder="Senha"
+                            secureTextEntry
+                        />
 
-                <LoginContentButton>
-                    <LoginContentButtonText>ENTRAR</LoginContentButtonText>
-                </LoginContentButton>
+                        <LoginContentButton>
+                            <LoginContentButtonText>ENTRAR</LoginContentButtonText>
+                        </LoginContentButton>
 
-                <TextContentButton onPress={handleForgotPassword} >
-                    <TextContent>Esqueceu a senha?</TextContent>
-                </TextContentButton>
-            </Content>
+                        <TextContentButton onPress={handleForgotPassword} >
+                            <TextContent>Esqueceu a senha?</TextContent>
+                        </TextContentButton>
+                    </Content>
 
 
-            <Footer>
-                <FooterButtonContainer onPress={handleRegister} >
-                    <ButtonText>FAZER CADASTRO</ButtonText>
-                </FooterButtonContainer>
-                <FooterImage/>
-            </Footer>
+                    <Footer>
+                        <FooterButtonContainer onPress={handleRegister} >
+                            <ButtonText>FAZER CADASTRO</ButtonText>
+                        </FooterButtonContainer>
+                        <FooterImage/>
+                    </Footer>
 
-        </Container>
+                </Container>
+            </ScrollView>
+        </>
     )
 }
 

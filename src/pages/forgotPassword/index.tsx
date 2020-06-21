@@ -5,6 +5,8 @@ import { Container, Header, TitleHeader, Content, Footer,
 import InputComponent from '../../components/input';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native'
+
 
 const Login: React.FC = () =>{
 
@@ -16,39 +18,44 @@ const Login: React.FC = () =>{
 
 
     return(
-        <Container>
+            <ScrollView 
+                keyboardShouldPersistTaps='handled'
+                contentContainerStyle={{flex: 1}}
+            >
+            <Container>
 
-            <Header>
-                <TitleHeader>
-                    Recuperação de  {"\n"} senha
-                </TitleHeader>
-            </Header>
+                <Header>
+                    <TitleHeader>
+                        Recuperação de  {"\n"} senha
+                    </TitleHeader>
+                </Header>
 
-            <Content>
-                <InputComponent
-                    icon='mail'
-                    name="email" 
-                    placeholder="E-mail"
-                />
-                
+                <Content>
+                    <InputComponent
+                        icon='mail'
+                        name="email" 
+                        placeholder="E-mail"
+                    />
+                    
 
-                <LoginContentButton>
-                    <LoginContentButtonText>ENVIAR</LoginContentButtonText>
-                </LoginContentButton>
+                    <LoginContentButton>
+                        <LoginContentButtonText>ENVIAR</LoginContentButtonText>
+                    </LoginContentButton>
 
-                
-            </Content>
+                    
+                </Content>
 
 
-            <Footer>
-                <FooterButtonContainer onPress={handleBackToLogin}>
-                    <Icon name="arrow-left" size={18} color="#32AFC0"/>
-                    <ButtonText>VOLTAR PARA O LOGIN</ButtonText>
-                </FooterButtonContainer>
-                <FooterImage/>
-            </Footer>
+                <Footer>
+                    <FooterButtonContainer onPress={handleBackToLogin}>
+                        <Icon name="arrow-left" size={18} color="#32AFC0"/>
+                        <ButtonText>VOLTAR PARA O LOGIN</ButtonText>
+                    </FooterButtonContainer>
+                    <FooterImage/>
+                </Footer>
 
-        </Container>
+            </Container>
+        </ScrollView>
     )
 }
 

@@ -5,6 +5,7 @@ import { Container, Header, TitleHeader, Content, Footer,
 import InputComponent from '../../components/input';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import { ScrollView } from 'react-native'
 
 const Login: React.FC = () =>{
 
@@ -15,51 +16,57 @@ const Login: React.FC = () =>{
     },[])
 
     return(
-        <Container>
+            <ScrollView 
+                keyboardShouldPersistTaps='handled'
+                contentContainerStyle={{flex: 1}}
+            >
+            <Container>
+            
 
-            <Header>
-                <TitleHeader>
-                    Cadastre-se
-                </TitleHeader>
-            </Header>
+                <Header>
+                    <TitleHeader>
+                        Cadastre-se
+                    </TitleHeader>
+                </Header>
 
-            <Content>
-                <InputComponent
-                    icon='mail'
-                    name="email" 
-                    placeholder="E-mail"
-                />
-                
-                <InputComponent
-                    icon='lock'
-                    name="password" 
-                    placeholder="Senha"
-                    secureTextEntry
-                />
+                <Content>
+                    <InputComponent
+                        icon='mail'
+                        name="email" 
+                        placeholder="E-mail"
+                    />
+                    
+                    <InputComponent
+                        icon='lock'
+                        name="password" 
+                        placeholder="Senha"
+                        secureTextEntry
+                    />
 
-                <InputComponent
-                    icon='lock'
-                    name="password_confirmation" 
-                    placeholder="Confirmar senha"
-                    secureTextEntry
-                />
-
-
-                <LoginContentButton>
-                    <LoginContentButtonText>CADASTRAR</LoginContentButtonText>
-                </LoginContentButton>
-            </Content>
+                    <InputComponent
+                        icon='lock'
+                        name="password_confirmation" 
+                        placeholder="Confirmar senha"
+                        secureTextEntry
+                    />
 
 
-            <Footer>
-                <FooterButtonContainer onPress={handleRegister} >
-                    <Icon name="facebook"  size={18} color="#32AFC0"/>
-                    <ButtonText>LOGIN COM FACEBOOK</ButtonText>
-                </FooterButtonContainer>
-                <FooterImage/>
-            </Footer>
+                    <LoginContentButton>
+                        <LoginContentButtonText>CADASTRAR</LoginContentButtonText>
+                    </LoginContentButton>
+                </Content>
 
-        </Container>
+
+                <Footer>
+                    <FooterButtonContainer onPress={handleRegister} >
+                        <Icon name="facebook"  size={18} color="#32AFC0"/>
+                        <ButtonText>LOGIN COM FACEBOOK</ButtonText>
+                    </FooterButtonContainer>
+                    <FooterImage/>
+                </Footer>
+
+            </Container>
+        </ScrollView>
     )
 }
 
