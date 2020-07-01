@@ -6,7 +6,6 @@ import { Container, Header, ImageHeaderBackground, Footer,
     ContentTitleDescription } from './styles';
 import { useNavigation } from '@react-navigation/native';
 
-
 const WhyAdopt: React.FC = () =>{
     const navigation = useNavigation();
 
