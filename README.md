@@ -14,6 +14,14 @@ FindPet - Mobile (under construction)
   </a>
 </p>
 
+<div align="center">
+  
+  <img src="https://github.com/Marcelo8173/HTML-CSS-e-JavaScript/blob/master/Screenshot_20200621-162958_2.png" width="200" />
+  <img src="https://github.com/Marcelo8173/HTML-CSS-e-JavaScript/blob/master/Screenshot_20200621-163005_2.png" width="200" />
+  <img src="https://github.com/Marcelo8173/HTML-CSS-e-JavaScript/blob/master/Screenshot_20200621-163011_2.png" width="200" />
+  <img src="https://github.com/Marcelo8173/HTML-CSS-e-JavaScript/blob/master/Screenshot_20200621-163023_2.png" width="200" />
+
+</div>
 <hr />
 
 ## Features
@@ -33,8 +41,8 @@ This app features all the latest tools and practices in web mobile development
 - Use `yarn run android` to install this app in mobile
 
 
-<div align="center">
-<img  src="https://github.com/Marcelo8173/FindPet/blob/master/tmp/Grupo%20236.png" alt="FindPet" width="180">
+<div >
+<img align="center" src="https://github.com/Marcelo8173/FindPet/blob/master/tmp/Grupo%20236.png" alt="FindPet" width="180">
 <div/>
 
 ## License
