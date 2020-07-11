@@ -5,21 +5,52 @@ import { Container, Header, TitleHeader, Content, Footer,
 import InputComponent from '../../components/input';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
-import { ScrollView } from 'react-native'
+import { ScrollView, Alert } from 'react-native'
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
+import api from '../../services/api';
+import getValidationErros from '../../utils/getValidationsErros';
+
+interface RequestData{
+    email: string;
+    password: string;
+}
+
 
 const Login: React.FC = () =>{
     const formRef = useRef<FormHandles>(null);
-    
     const navigation = useNavigation();
 
     const handleRegister = useCallback(() =>{
         navigation.navigate('doRegister')
     },[]);
 
-    const handleSubmit = useCallback(() => {
+    const handleSubmit = useCallback(async (data:RequestData) => {
+        try {
+            const schemma = Yup.object().shape({
+                email: Yup.string().email().required('Email é obrigatorio'),
+                password: Yup.string().required(),
+            });
 
+            await schemma.validate(data,{
+                abortEarly: false
+            })
+
+            await api.post('/users/create',data);
+
+            Alert.alert('Usuario cadastrado com sucesso','Você já pode efetuar o login')
+
+            navigation.goBack();
+    
+        } catch (error) {
+            if(error instanceof Yup.ValidationError){
+                const erros = getValidationErros(error)
+                formRef.current?.setErrors(erros);
+            }
+
+            Alert.alert('Erro no cadastro');
+        }
     },[])
 
     return(

@@ -16,6 +16,7 @@ const WhyAdopt: React.FC = () =>{
     const handleToNavitionNextPage = useCallback(() =>{
         navigation.navigate('secondpage')
     },[])
+        
     return(
         <Container>
             <Header>

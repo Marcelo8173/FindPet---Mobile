@@ -4,10 +4,13 @@ import { Container, Header, TitleHeader, Content, Footer,
     ButtonText, LoginContentButton,  LoginContentButtonText,
     FooterImage} from './styles';
 import InputComponent from '../../components/input';
-import { ScrollView, TextInput } from 'react-native'
+import { ScrollView, TextInput, Alert,SafeAreaView } from 'react-native'
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../hooks/Auth';
+import * as Yup from 'yup';
+import getValidationErros from '../../utils/getValidationsErros';
 
 interface singInFormData{
     email: string;
@@ -17,8 +20,8 @@ interface singInFormData{
 const Login: React.FC = () =>{
     const formRef = useRef<FormHandles>(null);
     const passwordRef = useRef<TextInput>(null);
-
     const navigation = useNavigation();
+    const { singIn } = useAuth();
 
 
     const handleForgotPassword = useCallback(() =>{
@@ -33,14 +36,35 @@ const Login: React.FC = () =>{
         formRef.current?.setErrors({});
             try {
 
+                const schema = Yup.object().shape({
+                    email: Yup.string().required('E-mail é obrigatorio').email(),
+                    password: Yup.string().min(3).required('Senha é obrigatoria'),
+                })
+
+
+                await schema.validate(data,{
+                    abortEarly: false,
+                })
+
+
+                await singIn({
+                    email: data.email,
+                    password: data.password,
+                })
 
             } catch (error) {
-               
+                if(error instanceof Yup.ValidationError){
+                    const erros = getValidationErros(error)
+                    formRef.current?.setErrors(erros);
+                }
+
+                Alert.alert('Erro na autenticação');
             }
-        },[]);
+        },[singIn]);
 
     return(
         <>
+           
             <ScrollView 
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex: 1}}
@@ -70,15 +94,19 @@ const Login: React.FC = () =>{
                             />
                             
                             <InputComponent
+                                ref={passwordRef}
                                 icon='lock'
                                 name="password"
                                 returnKeyType="send" 
                                 placeholder="Senha"
                                 secureTextEntry
+                                onSubmitEditing={formRef.current?.submitForm}
                             />
                         </Form>
 
-                        <LoginContentButton>
+                        <LoginContentButton onPress={() =>{
+                            formRef.current?.submitForm();
+                        }}>
                             <LoginContentButtonText>ENTRAR</LoginContentButtonText>
                         </LoginContentButton>
 
